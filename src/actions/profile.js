@@ -1,5 +1,5 @@
-import { BASE_API_URL } from '../utils/constants';
-import { UPDATE_PROFILE } from '../utils/constants';
+import { BASE_API_URL } from '../../server/utils/constants';
+import { UPDATE_PROFILE } from '../../server/utils/constants';
 import { history } from '../router/AppRouter';
 import { getErrors } from './errors';
 import { get, post } from '../utils/api';
