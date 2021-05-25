@@ -1,8 +1,8 @@
-import { BASE_API_URL } from '../../server/utils/constants';
-import { UPDATE_PROFILE } from '../../server/utils/constants';
-import { history } from '../router/AppRouter';
+import { BASE_API_URL } from '../utils/constants';
+import { UPDATE_PROFILE } from '../utils/constants';
 import { getErrors } from './errors';
 import { get, post } from '../utils/api';
+import { setAuthHeader } from '../utils/common';
 
 export const updateProfile = (profile) => ({
     type: UPDATE_PROFILE,
@@ -14,7 +14,6 @@ export const initiateUpdateProfile = (profileData) => {
         try {
             const profile = await post (`${BASE_API_URL}/profile`, profileData);
             dispatch(updateProfile(profile.data));
-            history.push('/profile');
         } catch (error) {
             error.response && dispatch(getErrors(error.response.data));
         }
@@ -24,6 +23,7 @@ export const initiateUpdateProfile = (profileData) => {
 export const initiateGetProfile = (email) => {
     return async (dispatch) => {
         try {
+            setAuthHeader();
             const profile = await get (`${BASE_API_URL}/profile`);
             dispatch(updateProfile(profile.data));
         } catch (error) {
